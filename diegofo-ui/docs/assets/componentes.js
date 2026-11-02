@@ -216,7 +216,7 @@
           { nombre: 'rows', tipo: 'Array<object>', desc: 'Datos.' },
         ],
         ejemplos: [
-          { titulo: 'Clientes', html: '<df-data-table id="t-demo" searchable page-size="4" striped clickable caption="Clientes"></df-data-table>', script: "const t = document.getElementById('t-demo');\nt.columns = [\n  { key: 'nombre', label: 'Nombre' },\n  { key: 'tipo', label: 'Tipo', render: (r) => `<df-badge size=\"sm\" variant=\"soft\" color=\"${r.tipo === 'Cliente' ? 'blue' : 'green'}\">${r.tipo}</df-badge>` },\n  { key: 'alta', label: 'Alta', type: 'date' },\n  { key: 'facturado', label: 'Facturado', type: 'currency' },\n];\nt.rows = [\n  { nombre: 'Ana Gómez', tipo: 'Cliente', alta: '2026-03-12', facturado: 1240 },\n  { nombre: 'Sodire Tech', tipo: 'Proveedor', alta: '2026-04-01', facturado: 8900 },\n  { nombre: 'Íñigo Pérez', tipo: 'Cliente', alta: '2026-05-20', facturado: 310.5 },\n  { nombre: 'Lucía Ruiz', tipo: 'Cliente', alta: '2026-06-02', facturado: 2050 },\n  { nombre: 'TAME Formación', tipo: 'Proveedor', alta: '2026-07-15', facturado: 15400 },\n  { nombre: 'Marcos Alonso', tipo: 'Cliente', alta: '2026-09-09', facturado: 95 },\n];\nt.addEventListener('df-row-click', (e) => DfToastStack.notify(`Has pulsado ${e.detail.row.nombre}`));" },
+          { titulo: 'Clientes', html: '<df-data-table id="t-demo" searchable page-size="4" striped clickable caption="Clientes"></df-data-table>', script: "const t = document.getElementById('t-demo');\nt.columns = [\n  { key: 'nombre', label: 'Nombre' },\n  { key: 'tipo', label: 'Tipo', render: (r) => `<df-badge size=\"sm\" variant=\"soft\" color=\"${r.tipo === 'Cliente' ? 'blue' : 'green'}\">${r.tipo}</df-badge>` },\n  { key: 'alta', label: 'Alta', type: 'date' },\n  { key: 'facturado', label: 'Facturado', type: 'currency' },\n];\nt.rows = [\n  { nombre: 'Ana Gómez', tipo: 'Cliente', alta: '2026-03-12', facturado: 1240 },\n  { nombre: 'Sodire Tech', tipo: 'Proveedor', alta: '2026-04-01', facturado: 8900 },\n  { nombre: 'Íñigo Pérez', tipo: 'Cliente', alta: '2026-05-20', facturado: 310.5 },\n  { nombre: 'Lucía Ruiz', tipo: 'Cliente', alta: '2026-06-02', facturado: 2050 },\n  { nombre: 'Nexo Logística', tipo: 'Proveedor', alta: '2026-07-15', facturado: 15400 },\n  { nombre: 'Marcos Alonso', tipo: 'Cliente', alta: '2026-09-09', facturado: 95 },\n];\nt.addEventListener('df-row-click', (e) => DfToastStack.notify(`Has pulsado ${e.detail.row.nombre}`));" },
         ],
         eventos: [
           { nombre: 'df-sort', detalle: "{ key: string, direction: 'asc' | 'desc' }", cuando: 'Al ordenar por una columna.' },
@@ -256,7 +256,7 @@
         props: { color: 'Color de la paleta o cualquier color CSS.', variant: 'Relleno.', size: 'Tamaño.', dot: 'Punto delante del texto.' },
         opciones: { color: ['teal', 'blue', 'green', 'orange', 'red', 'yellow', 'purple', 'magenta', 'gray'], variant: ['solid', 'soft', 'outline'], size: ['sm', 'md'] },
         ejemplos: [
-          { titulo: 'Colores y estilos', html: '<df-badge>teal</df-badge>\n<df-badge color="blue">blue</df-badge>\n<df-badge color="purple">purple</df-badge>\n<df-badge color="green" variant="soft" dot>Activo</df-badge>\n<df-badge color="red" variant="soft" dot>Inactivo</df-badge>\n<df-badge color="orange" variant="outline">Pendiente</df-badge>\n<df-badge color="#7c3aed" size="sm">IPE II</df-badge>' },
+          { titulo: 'Colores y estilos', html: '<df-badge>teal</df-badge>\n<df-badge color="blue">blue</df-badge>\n<df-badge color="purple">purple</df-badge>\n<df-badge color="green" variant="soft" dot>Activo</df-badge>\n<df-badge color="red" variant="soft" dot>Inactivo</df-badge>\n<df-badge color="orange" variant="outline">Pendiente</df-badge>\n<df-badge color="#7c3aed" size="sm">Urgente</df-badge>' },
         ],
         eventos: [], metodos: [],
         slots: [{ nombre: '(por defecto)', desc: 'Texto.' }],
@@ -288,7 +288,7 @@
         opciones: { variant: ['line', 'pill'] },
         ejemplos: [
           { titulo: 'Subrayado', html: '<df-tabs>\n  <df-tab-panel label="Perfil">Nombre, foto y datos de contacto.</df-tab-panel>\n  <df-tab-panel label="Seguridad">Contraseña y verificación en dos pasos.</df-tab-panel>\n  <df-tab-panel label="Facturación" disabled>Disponible en el plan Pro.</df-tab-panel>\n  <df-tab-panel label="Avisos">Qué correos quieres recibir.</df-tab-panel>\n</df-tabs>' },
-          { titulo: 'Píldoras', html: '<df-tabs variant="pill">\n  <df-tab-panel label="Semana">Resumen de los últimos 7 días.</df-tab-panel>\n  <df-tab-panel label="Mes">Resumen de los últimos 30 días.</df-tab-panel>\n  <df-tab-panel label="Año">Resumen del curso.</df-tab-panel>\n</df-tabs>' },
+          { titulo: 'Píldoras', html: '<df-tabs variant="pill">\n  <df-tab-panel label="Semana">Resumen de los últimos 7 días.</df-tab-panel>\n  <df-tab-panel label="Mes">Resumen de los últimos 30 días.</df-tab-panel>\n  <df-tab-panel label="Año">Resumen de los últimos 12 meses.</df-tab-panel>\n</df-tabs>' },
         ],
         eventos: [{ nombre: 'df-tab-change', detalle: '{ index: number, label: string }', cuando: 'Cuando el usuario cambia de pestaña.' }],
         metodos: [

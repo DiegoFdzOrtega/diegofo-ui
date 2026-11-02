@@ -64,7 +64,7 @@ export function escapeHtml(value) {
 /** Estilos comunes que se inyectan en el Shadow DOM de todos los componentes. */
 export const baseStyles = `
   :host {
-    /* Paleta: si la página define las variables de diegofo-ui (RA2) se usan; si no, valores por defecto. */
+    /* Paleta: si la página define las variables de diegofo-ui se usan; si no, valores por defecto. */
     --df-primary: var(--df-color-primary, var(--bg-navbar, #1a4d59));
     --df-secondary: var(--df-color-secondary, var(--bg-secondary-nav, #6b9eac));
     --df-teal: var(--accent-teal, #0d9488);

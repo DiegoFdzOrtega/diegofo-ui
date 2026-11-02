@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>diegofo | UI Studio & Workstation Pro · RA3</title>
+  <title>diegofo | UI Studio & Workstation Pro</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
   
   <link rel="stylesheet" href="style.css" />
 
-  <!-- RA3: librería de componentes propia (paquete generado con "npm run build" en ../diegofo-ui) -->
+  <!-- Librería de componentes diegofo-ui (generada con "npm run build" en ../diegofo-ui) -->
   <script src="lib/diegofo-ui.min.js"></script>
 </head>
 <body>
@@ -97,7 +97,7 @@
       <nav class="nav-tabs" id="nav-secondary">
         <button class="tab-btn sub-tab teal" data-view="libreria">
           <span class="badge">L</span>
-          <span class="tab-label">Librería RA3</span>
+          <span class="tab-label">Librería</span>
         </button>
         <button class="tab-btn sub-tab yellow" data-view="sub-clientes">
           <span class="badge" id="badge-clients-count">C</span>
@@ -108,8 +108,8 @@
           <span class="tab-label">Formulario</span>
         </button>
         <button class="tab-btn sub-tab purple" data-view="horario">
-          <span class="badge">H</span>
-          <span class="tab-label">Horario DAM 2</span>
+          <span class="badge">A</span>
+          <span class="tab-label">Agenda</span>
         </button>
         <button class="tab-btn sub-tab blue" data-view="sub-empresas">
           <span class="badge">E</span>
@@ -130,7 +130,7 @@
     <main class="main-content">
       <div id="views-container">
 
-        <!-- Vista RA3: escaparate de la librería de componentes diegofo-ui -->
+        <!-- Vista Librería: escaparate de los componentes de diegofo-ui -->
         <section class="view-panel" id="view-libreria">
           <div class="card card-modern card-fullwidth">
             <div class="card-header">
@@ -147,15 +147,15 @@
               <article class="lib-card">
                 <header><code>&lt;df-select&gt;</code> <code>&lt;df-switch&gt;</code><span>Formularios con estilo propio y teclado completo</span></header>
                 <div class="lib-demo lib-demo-col">
-                  <df-select id="lib-select" label="Asignatura favorita" placeholder="Elige una">
-                    <option value="di">Desarrollo de Interfaces</option>
-                    <option value="ad">Acceso a Datos</option>
-                    <option value="pm">Programación Multimedia</option>
-                    <option value="ps">Programación de Servicios</option>
+                  <df-select id="lib-select" label="Área del proyecto" placeholder="Elige una">
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="datos">Datos</option>
+                    <option value="diseno">Diseño</option>
                   </df-select>
-                  <df-switch id="lib-switch" label="Avisarme de nuevas entregas" checked></df-switch>
+                  <df-switch id="lib-switch" label="Avisarme de novedades" checked></df-switch>
                 </div>
-                <pre>&lt;df-select label="Asignatura"&gt;&lt;option value="di"&gt;…&lt;/option&gt;&lt;/df-select&gt;</pre>
+                <pre>&lt;df-select label="Área"&gt;&lt;option value="frontend"&gt;…&lt;/option&gt;&lt;/df-select&gt;</pre>
               </article>
 
               <article class="lib-card">
@@ -170,7 +170,7 @@
                       </div>
                     </df-tab-panel>
                     <df-tab-panel label="Progreso">
-                      <df-progress label="Entrega RA3" value="90" show-value variant="success"></df-progress>
+                      <df-progress label="Lanzamiento v2" value="90" show-value variant="success"></df-progress>
                     </df-tab-panel>
                   </df-tabs>
                 </div>
@@ -225,7 +225,7 @@
                 <header><code>&lt;df-stat-card&gt;</code><span>Métricas con formato automático</span></header>
                 <div class="lib-demo lib-demo-grid">
                   <df-stat-card label="Facturación" value="12480.5" format="currency" variant="success" hint="Este mes"></df-stat-card>
-                  <df-stat-card label="Progreso RA3" value="87.5" format="percent" variant="info" interactive id="lib-stat"></df-stat-card>
+                  <df-stat-card label="Progreso del sprint" value="87.5" format="percent" variant="info" interactive id="lib-stat"></df-stat-card>
                 </div>
                 <pre>&lt;df-stat-card label="Facturación" value="12480.5" format="currency"&gt;</pre>
               </article>
@@ -327,15 +327,15 @@
           </div>
         </section>
 
-        <!-- Vista 3: Horario Lectivo DAM 2 -->
+        <!-- Vista 3: Agenda semanal -->
         <section class="view-panel" id="view-horario">
           <div class="card card-modern card-fullwidth">
             <div class="card-header">
               <div>
-                <h2>Horario Lectivo · DAM 2 (TAME Formación)</h2>
-                <p class="subtitle">Planificación semanal de clases, aulas y asignaturas.</p>
+                <h2>Agenda semanal</h2>
+                <p class="subtitle">Bloques de trabajo, reuniones y tareas recurrentes de la semana.</p>
               </div>
-              <span class="status-badge live"><i data-lucide="calendar"></i> Curso 2026/2027</span>
+              <span class="status-badge live"><i data-lucide="calendar"></i> Semana 45</span>
             </div>
 
             <div class="table-container">
@@ -493,8 +493,8 @@
               </div>
               <div class="mini-card">
                 <div class="mini-card-icon teal"><i data-lucide="building"></i></div>
-                <h3>TAME Formación</h3>
-                <p>Centro de Estudio DAM</p>
+                <h3>Nexo Logística</h3>
+                <p>8 contactos · Activa</p>
               </div>
             </div>
           </div>

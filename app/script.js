@@ -1,6 +1,6 @@
 /**
- * diegofo | UI Studio Workstation Pro · versión RA3
- * La misma app del RA2, pero usando la librería de componentes propia diegofo-ui
+ * diegofo | UI Studio Workstation Pro
+ * Aplicación de ejemplo construida con la librería de componentes diegofo-ui
  * (df-button, df-input, df-modal, df-toast-stack, df-stat-card, df-theme-toggle, df-badge).
  */
 
@@ -8,23 +8,17 @@
 const { DfModal, DfInput, escapeHtml, VERSION } = window.DiegofoUI;
 
 const app = {
-  STORAGE_KEY: 'diegofo_ui_ra3_data',
+  STORAGE_KEY: 'diegofo_ui_data',
 
-  // Horario extraído de tu captura lectiva de DAM 2
+  // Agenda semanal de trabajo (se pinta como píldoras de colores en la vista "Agenda semanal")
   scheduleData: [
-    { hora: '12:00 - 12:30', lunes: '-', martes: '-', miercoles: '-', jueves: 'Acceso a Datos', viernes: '-' },
-    { hora: '12:30 - 13:30', lunes: 'Desarrollo de Interfaces', martes: '-', miercoles: '-', jueves: 'Acceso a Datos', viernes: '-' },
-    { hora: '13:30 - 14:00', lunes: 'Proyecto intermodular II', martes: '-', miercoles: '-', jueves: 'Acceso a Datos', viernes: '-' },
-    { hora: '14:00 - 14:30', lunes: 'Proyecto intermodular II', martes: '-', miercoles: '-', jueves: 'Sistemas de Gestión Emp.', viernes: '-' },
-    { hora: '14:30 - 15:00', lunes: 'Programación Multimedia', martes: '-', miercoles: '-', jueves: 'Sistemas de Gestión Emp.', viernes: '-' },
-    { hora: '15:00 - 16:00', lunes: 'Programación Multimedia', martes: '-', miercoles: '-', jueves: 'Sistemas de Gestión Emp.', viernes: 'Desarrollo de Interfaces' },
-    { hora: '16:00 - 16:30', lunes: 'Programación Multimedia', martes: '-', miercoles: '-', jueves: 'Sistemas de Gestión Emp.', viernes: 'Desarrollo de Interfaces' },
-    { hora: '16:30 - 17:00', lunes: 'Programación de Servicios', martes: '-', miercoles: '-', jueves: '-', viernes: 'Desarrollo de Interfaces' },
-    { hora: '17:00 - 17:30', lunes: 'Programación de Servicios', martes: '-', miercoles: '-', jueves: 'Inglés II', viernes: '-' },
-    { hora: '17:30 - 18:00', lunes: '-', martes: '-', miercoles: '-', jueves: 'Inglés II', viernes: '-' },
-    { hora: '18:00 - 19:00', lunes: '-', martes: '-', miercoles: 'IPE II', jueves: '-', viernes: '-' },
-    { hora: '19:00 - 20:00', lunes: '-', martes: '-', miercoles: 'Digitalización', jueves: '-', viernes: '-' },
-    { hora: '20:00 - 21:00', lunes: '-', martes: '-', miercoles: 'Sostenibilidad', jueves: '-', viernes: '-' }
+    { hora: '09:00 - 09:30', lunes: 'Reunión de equipo', martes: 'Daily', miercoles: 'Daily', jueves: 'Daily', viernes: 'Daily' },
+    { hora: '09:30 - 11:00', lunes: 'Desarrollo frontend', martes: 'Desarrollo frontend', miercoles: 'Diseño de interfaz', jueves: 'Desarrollo backend', viernes: 'Revisión de código' },
+    { hora: '11:00 - 11:30', lunes: '-', martes: '-', miercoles: '-', jueves: '-', viernes: '-' },
+    { hora: '11:30 - 13:00', lunes: 'Desarrollo frontend', martes: 'Soporte a clientes', miercoles: 'Diseño de interfaz', jueves: 'Desarrollo backend', viernes: 'Documentación' },
+    { hora: '13:00 - 14:00', lunes: 'Revisión SEO', martes: '-', miercoles: 'Llamada con cliente', jueves: '-', viernes: 'Demo semanal' },
+    { hora: '15:00 - 16:30', lunes: 'Pruebas', martes: 'Desarrollo frontend', miercoles: 'Pruebas', jueves: 'Formación', viernes: '-' },
+    { hora: '16:30 - 18:00', lunes: 'Inventario', martes: 'Facturación', miercoles: '-', jueves: 'Formación', viernes: '-' }
   ],
 
   state: {
@@ -41,7 +35,7 @@ const app = {
     ],
     kanban: [
       { id: 'k1', title: 'Revisión SEO Sodire', desc: 'Optimización de meta etiquetas y palabras clave', status: 'backlog', tag: 'SEO' },
-      { id: 'k2', title: 'Módulo Formulario DAM', desc: 'Validaciones de campos en Vanilla JS', status: 'in_progress', tag: 'Dev' },
+      { id: 'k2', title: 'Módulo de formularios', desc: 'Validaciones de campos en Vanilla JS', status: 'in_progress', tag: 'Dev' },
       { id: 'k3', title: 'Diseño diegofo-ui', desc: 'Librería visual con pestañas recortadas', status: 'done', tag: 'UI/UX' }
     ],
     products: [
@@ -263,14 +257,14 @@ const app = {
     this.showToast('CSV exportado.', 'success');
   },
 
-  // Renderizado Garantizado del Horario DAM 2 (con Píldoras Visibles de Colores)
+  // Agenda semanal: cada bloque es un <df-badge> con el color del día
   renderSchedule() {
     const tbody = document.getElementById('schedule-table-body');
     if (!tbody) return;
 
     tbody.innerHTML = '';
 
-    // Cada asignatura es un <df-badge> con el color del día.
+    // Cada bloque es un <df-badge> con el color del día.
     const getPill = (subject, color) => {
       if (!subject || subject === '-') return '<span style="color: #888888;">-</span>';
       return `<df-badge color="${color}">${escapeHtml(subject)}</df-badge>`;
@@ -487,12 +481,12 @@ const app = {
 
     const commands = [
       { label: 'Ir a Formulario', action: () => this.switchView('formulario') },
-      { label: 'Ir a Horario DAM 2', action: () => this.switchView('horario') },
+      { label: 'Ir a Agenda semanal', action: () => this.switchView('horario') },
       { label: 'Ir a Directorio de Clientes', action: () => this.switchView('sub-clientes') },
       { label: 'Ir a Tablero Kanban', action: () => this.switchView('seguimiento') },
       { label: 'Ir a Productos & Stock', action: () => this.switchView('productos') },
       { label: 'Ir a Configuración', action: () => this.switchView('config') },
-      { label: 'Ir a Librería RA3 (componentes)', action: () => this.switchView('libreria') },
+      { label: 'Ir a Librería (componentes)', action: () => this.switchView('libreria') },
       { label: 'Alternar Tema Claro / Oscuro', action: () => this.toggleTheme() },
       { label: 'Exportar Copia de Seguridad JSON', action: () => this.exportBackup() }
     ];
@@ -635,7 +629,7 @@ const app = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               model: model,
-              prompt: `Eres el asistente de diegofo-ui para Diego Fernández. Tienes acceso al horario lectivo de DAM 2. Responde de manera concisa.\n\nUsuario: ${userText}\nAsistente:`,
+              prompt: `Eres el asistente de diegofo-ui para Diego Fernández. Tienes acceso a su agenda semanal de trabajo. Responde de manera concisa.\n\nUsuario: ${userText}\nAsistente:`,
               stream: false
             })
           });
@@ -784,7 +778,7 @@ const app = {
     });
   },
 
-  // Vista "Librería RA3": demos en vivo de cada componente.
+  // Vista "Librería": demos en vivo de cada componente.
   initLibraryView() {
     document.getElementById('lib-version').textContent = 'v' + VERSION;
 
@@ -802,7 +796,7 @@ const app = {
 
     document.getElementById('lib-modal-btn').addEventListener('df-click', () => document.getElementById('modal-demo').show());
     document.getElementById('lib-confirm-btn').addEventListener('df-click', async () => {
-      const ok = await DfModal.confirm({ heading: 'Confirmar', message: '¿Aceptas el reto del RA3?', variant: 'danger' });
+      const ok = await DfModal.confirm({ heading: 'Confirmar', message: '¿Publicamos la versión 2.0?', variant: 'danger' });
       this.showToast(`DfModal.confirm() → ${ok}`, ok ? 'success' : 'warning');
     });
     document.getElementById('lib-prompt-btn').addEventListener('df-click', async () => {

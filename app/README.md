@@ -1,6 +1,6 @@
-# diegofo-ui · Workstation (versión RA3)
+# diegofo · Workstation
 
-Es la interfaz del RA2 (*diegofo | UI Studio & Workstation Pro*) reconstruida con mi librería de componentes **diegofo-ui** (carpeta `../diegofo-ui`).
+Aplicación de ejemplo construida con la librería **diegofo-ui** (carpeta `../diegofo-ui`): CRM de clientes, inventario, tablero Kanban, agenda semanal y asistente de IA local.
 
 ## Cómo abrirla
 
@@ -10,7 +10,7 @@ Si cambias algo de la librería, ejecuta `npm run build` dentro de `../diegofo-u
 
 ## Dónde ver la librería
 
-Al abrir la app sale la pestaña **Librería RA3** (la primera del submenú). Ahí están los componentes funcionando en vivo, con el código para usar cada uno, y un botón que abre la documentación completa (`../diegofo-ui/docs/index.html`).
+Al abrir la app sale la pestaña **Librería** (la primera del submenú). Ahí están los componentes funcionando en vivo, con el código para usar cada uno, y un botón que abre la documentación completa (`../diegofo-ui/docs/index.html`).
 
 ## Qué componentes usa y dónde
 
@@ -26,14 +26,14 @@ Al abrir la app sale la pestaña **Librería RA3** (la primera del submenú). Ah
 | `<df-tooltip>` | Botones de la barra superior, exportar CSV y avisos de stock bajo |
 | `<df-progress>` | Porcentaje de tarjetas completadas en el Kanban |
 | `<df-stat-card>` | Métricas de productos (la de alertas es interactiva) |
-| `<df-badge>` | Tipo y estado de clientes, horario, etiquetas del Kanban, categorías |
+| `<df-badge>` | Tipo y estado de clientes, agenda, etiquetas del Kanban, categorías |
 | `<df-avatar>` | Perfil de la barra superior y equipo en la vista Librería |
 | `<df-tabs>` | Vista Librería |
 | `<df-theme-toggle>` | Tema claro / oscuro, sincronizado entre la barra y la vista Librería |
 
-## Cambios respecto al RA2
+## Detalles de implementación
 
-- Ya no se usan `prompt()`, `confirm()` ni `alert()`: todo pasa por `df-modal` y `df-toast-stack`.
+- Sin `prompt()`, `confirm()` ni `alert()` del navegador: todo pasa por `df-modal` y `df-toast-stack`.
 - Los formularios validan antes de guardar y marcan en rojo el campo con error.
 - Los datos que escribe el usuario se escapan antes de pintarlos en las tablas.
-- Arreglado: el tema guardado no se aplicaba al recargar, el Kanban añadía listeners de *drop* repetidos en cada repintado y el submenú no resaltaba la vista activa al cambiar desde código o con Ctrl+K.
+- Los datos (clientes, tarjetas, productos, tema y ajustes) se guardan en `localStorage` y se pueden exportar e importar en JSON.

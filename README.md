@@ -76,7 +76,7 @@ Cada uno tiene su página en la [documentación](https://diegofdzortega.github.i
 ## Cómo está construida
 
 ```
-RA3-Interfaces/  (raíz del repositorio)
+diegofo-ui/  (raíz del repositorio)
 ├── diegofo-ui/                 la librería
 │   ├── src/core/df-element.js  clase base común
 │   ├── src/components/         un archivo por componente
@@ -119,31 +119,13 @@ El workflow `.github/workflows/pages.yml` pasa las pruebas, empaqueta y publica 
 
 ## App de ejemplo
 
-`app/` es una estación de trabajo (CRM, inventario, Kanban, horario y asistente de IA local con Ollama) construida con la librería: tablas con búsqueda y orden, formularios validados, modales en lugar de `prompt()`, métricas, tooltips y tema oscuro.
+`app/` es una estación de trabajo (CRM, inventario, Kanban, agenda y asistente de IA local con Ollama) construida con la librería: tablas con búsqueda y orden, formularios validados, modales en lugar de `prompt()`, métricas, tooltips y tema oscuro.
 
 ![App de ejemplo construida con diegofo-ui](diegofo-ui/docs/capturas/app.png)
 
-<details>
-<summary><strong>Contexto académico · RA3 de Desarrollo de Interfaces (DAM)</strong></summary>
-
-Este proyecto nació como la práctica del Resultado de Aprendizaje 3 del módulo 0488 Desarrollo de Interfaces: *Crea componentes visuales valorando y empleando herramientas específicas*.
-
-| Criterio | Dónde se cumple |
-|---|---|
-| a) Herramientas para diseño y prueba | Custom Elements + Shadow DOM, VS Code + Live Server, DevTools, Vitest, jsdom, esbuild, npm, TypeScript (tipos), GitHub Actions. Web de documentación y **banco de pruebas** propio (`diegofo-ui/docs`), equivalente a Storybook sin dependencias. Detalle en [`diegofo-ui/README.md`](diegofo-ui/README.md#herramientas). |
-| b) Componentes visuales | 15 etiquetas en `diegofo-ui/src/components/` con Shadow DOM, slots y partes CSS. |
-| c) Métodos y propiedades con valores por defecto | `static properties` con tipo y `default` en cada clase; métodos públicos documentados (`validate()`, `show()`, `sortBy()`, `DfModal.prompt()`…). |
-| d) Eventos y acciones | Eventos `df-*` en todos los componentes interactivos (`df-change`, `df-confirm` cancelable, `df-sort`, `df-row-click`…), con teclado y ratón. |
-| e) Pruebas unitarias | 154 pruebas en `diegofo-ui/test/` (`npm test`), ejecutadas también en CI. |
-| f) Documentación | JSDoc en el código, web de documentación, `docs/COMPONENTES.md` y tipos generados, README y CHANGELOG. |
-| g) Empaquetado | `dist/` (ESM + IIFE minificado) con esbuild y paquete npm `paquete/diegofo-ui-2.0.0.tgz` (`npm run empaquetar`). |
-| h) Aplicación con los componentes | `app/`: la interfaz del RA2 reconstruida con la librería. Ver [`app/README.md`](app/README.md). |
-
-</details>
 
 ## Autor
 
-**Diego Fernández Ortega** · Desarrollo de Aplicaciones Multiplataforma
-[GitHub](https://github.com/DiegoFdzOrtega)
+**Diego Fernández Ortega** · [GitHub](https://github.com/DiegoFdzOrtega)
 
 Licencia [MIT](LICENSE).

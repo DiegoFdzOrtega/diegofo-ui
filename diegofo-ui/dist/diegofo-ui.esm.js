@@ -18,7 +18,7 @@ function escapeHtml(value) {
 }
 var baseStyles = `
   :host {
-    /* Paleta: si la p\xE1gina define las variables de diegofo-ui (RA2) se usan; si no, valores por defecto. */
+    /* Paleta: si la p\xE1gina define las variables de diegofo-ui se usan; si no, valores por defecto. */
     --df-primary: var(--df-color-primary, var(--bg-navbar, #1a4d59));
     --df-secondary: var(--df-color-secondary, var(--bg-secondary-nav, #6b9eac));
     --df-teal: var(--accent-teal, #0d9488);

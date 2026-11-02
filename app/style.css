@@ -797,7 +797,7 @@ kbd {
 .margin-t-lg { margin-top: 24px; }
 .text-sm { font-size: 0.8rem; }
 .muted { color: var(--text-muted); }
-/* ===== RA3 · Ajustes para los componentes de diegofo-ui ===== */
+/* ===== Ajustes para los componentes de diegofo-ui ===== */
 /* Personalización desde fuera del Shadow DOM con ::part() */
 #table-schedule df-badge::part(badge) { white-space: normal; }
 .kanban-card-meta { align-items: center; }
@@ -805,7 +805,7 @@ kbd {
 /* En modo oscuro el color principal de los componentes pasa a teal (variable de la librería) */
 [data-theme="dark"] { --df-color-primary: var(--accent-teal); --df-color-secondary: #475569; }
 
-/* Vista "Librería RA3" */
+/* Vista "Librería" */
 .lib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
 .lib-card { border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-input); overflow: hidden; display: flex; flex-direction: column; }
 .lib-card header { padding: 12px 16px; border-bottom: 1px solid var(--border-color); line-height: 1.5; }

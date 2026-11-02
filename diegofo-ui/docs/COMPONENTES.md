@@ -502,7 +502,7 @@ Etiqueta de color para estados y categorías. Acepta los colores de la paleta po
 <df-badge color="green" variant="soft" dot>Activo</df-badge>
 <df-badge color="red" variant="soft" dot>Inactivo</df-badge>
 <df-badge color="orange" variant="outline">Pendiente</df-badge>
-<df-badge color="#7c3aed" size="sm">IPE II</df-badge>
+<df-badge color="#7c3aed" size="sm">Urgente</df-badge>
 ```
 
 ### Propiedades

@@ -4,7 +4,7 @@ import { DfElement } from '../core/df-element.js';
 export const BADGE_COLORS = ['teal', 'blue', 'green', 'orange', 'red', 'yellow', 'purple', 'magenta', 'gray'];
 
 /**
- * Etiqueta / píldora de color para estados, categorías o asignaturas.
+ * Etiqueta / píldora de color para estados y categorías.
  *
  * @element df-badge
  *
