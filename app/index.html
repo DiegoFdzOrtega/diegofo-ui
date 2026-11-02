@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>diegofo | UI Studio & Workstation Pro · RA3</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- RA3: librería de componentes propia (paquete generado con "npm run build" en ../diegofo-ui) -->
+  <script src="lib/diegofo-ui.min.js"></script>
+</head>
+<body>
+
+  <!-- Barra Superior (Navbar) -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="brand">
+        <div class="brand-icon"><i data-lucide="layers"></i></div>
+        <span class="brand-title"><strong>diegofo</strong> | UI Studio <span class="badge-pro">PRO</span></span>
+      </div>
+    </div>
+
+    <!-- Barra de búsqueda / Disparador Command Palette -->
+    <div class="search-bar" id="cmd-trigger">
+      <i data-lucide="search" class="search-icon"></i>
+      <input type="text" placeholder="Buscar o ejecutar comandos..." readonly />
+      <span class="shortcut-key"><kbd>Ctrl</kbd> <kbd>K</kbd></span>
+    </div>
+
+    <div class="navbar-right">
+      <df-tooltip text="Descargar copia de seguridad (JSON)" placement="bottom">
+        <button class="btn-icon" id="btn-export-all" aria-label="Descargar copia de seguridad">
+          <i data-lucide="download"></i>
+        </button>
+      </df-tooltip>
+
+      <df-tooltip text="Cambiar tema claro / oscuro" placement="bottom">
+        <df-theme-toggle id="theme-toggle"></df-theme-toggle>
+      </df-tooltip>
+
+      <df-button id="btn-quick-action" variant="warning" shape="rounded" size="sm">
+        <i data-lucide="plus"></i> <span>Nuevo Registro</span>
+      </df-button>
+
+      <div class="user-profile">
+        <df-avatar name="Diego Fernández" status="online" size="sm"></df-avatar>
+        <div class="user-info">
+          <span class="username">Diego Fernández</span>
+          <span class="user-role">Administrador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <div class="app-container">
+
+    <!-- Navegación Izquierda Nivel 1 -->
+    <aside class="sidebar primary-sidebar">
+      <nav class="nav-tabs" id="nav-primary">
+        <button class="tab-btn active teal" data-module="clientes">
+          <span class="badge">C</span>
+          <span class="tab-label">Clientes</span>
+        </button>
+        <button class="tab-btn blue" data-module="productos">
+          <span class="badge" id="badge-products-count">P</span>
+          <span class="tab-label">Productos</span>
+        </button>
+        <button class="tab-btn orange" data-module="seguimiento">
+          <span class="badge" id="badge-kanban-count">S</span>
+          <span class="tab-label">Kanban CRM</span>
+        </button>
+        <button class="tab-btn green" data-module="config">
+          <span class="badge">C</span>
+          <span class="tab-label">Ajustes</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-assistant-trigger" id="assistant-toggle">
+          <i data-lucide="bot"></i>
+          <span>Asistente IA</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Navegación Izquierda Nivel 2 (Submenú) -->
+    <aside class="sidebar secondary-sidebar">
+      <nav class="nav-tabs" id="nav-secondary">
+        <button class="tab-btn sub-tab teal" data-view="libreria">
+          <span class="badge">L</span>
+          <span class="tab-label">Librería RA3</span>
+        </button>
+        <button class="tab-btn sub-tab yellow" data-view="sub-clientes">
+          <span class="badge" id="badge-clients-count">C</span>
+          <span class="tab-label">Directorio</span>
+        </button>
+        <button class="tab-btn sub-tab green" data-view="formulario">
+          <span class="badge">F</span>
+          <span class="tab-label">Formulario</span>
+        </button>
+        <button class="tab-btn sub-tab purple" data-view="horario">
+          <span class="badge">H</span>
+          <span class="tab-label">Horario DAM 2</span>
+        </button>
+        <button class="tab-btn sub-tab blue" data-view="sub-empresas">
+          <span class="badge">E</span>
+          <span class="tab-label">Empresas</span>
+        </button>
+        <button class="tab-btn sub-tab purple" data-view="toasts">
+          <span class="badge">T</span>
+          <span class="tab-label">UI Toasts</span>
+        </button>
+        <button class="tab-btn sub-tab magenta" data-view="modal">
+          <span class="badge">M</span>
+          <span class="tab-label">Modales</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Áreas de Trabajo Dinámicas -->
+    <main class="main-content">
+      <div id="views-container">
+
+        <!-- Vista RA3: escaparate de la librería de componentes diegofo-ui -->
+        <section class="view-panel" id="view-libreria">
+          <div class="card card-modern card-fullwidth">
+            <div class="card-header">
+              <div>
+                <h2>Librería de componentes · diegofo-ui <span id="lib-version"></span></h2>
+                <p class="subtitle">Mis 15 etiquetas propias (Web Components). Todo lo de esta página es la librería funcionando en vivo; los mismos componentes se usan en el resto de la app.</p>
+              </div>
+              <a class="lib-link" href="../diegofo-ui/docs/index.html" target="_blank" rel="noopener">
+                <df-button variant="secondary" size="sm"><i data-lucide="book-open"></i> Abrir la documentación</df-button>
+              </a>
+            </div>
+
+            <div class="lib-grid">
+              <article class="lib-card">
+                <header><code>&lt;df-select&gt;</code> <code>&lt;df-switch&gt;</code><span>Formularios con estilo propio y teclado completo</span></header>
+                <div class="lib-demo lib-demo-col">
+                  <df-select id="lib-select" label="Asignatura favorita" placeholder="Elige una">
+                    <option value="di">Desarrollo de Interfaces</option>
+                    <option value="ad">Acceso a Datos</option>
+                    <option value="pm">Programación Multimedia</option>
+                    <option value="ps">Programación de Servicios</option>
+                  </df-select>
+                  <df-switch id="lib-switch" label="Avisarme de nuevas entregas" checked></df-switch>
+                </div>
+                <pre>&lt;df-select label="Asignatura"&gt;&lt;option value="di"&gt;…&lt;/option&gt;&lt;/df-select&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-tabs&gt;</code> <code>&lt;df-progress&gt;</code> <code>&lt;df-avatar&gt;</code> <code>&lt;df-tooltip&gt;</code><span>Estructura y feedback</span></header>
+                <div class="lib-demo lib-demo-col">
+                  <df-tabs variant="pill">
+                    <df-tab-panel label="Equipo">
+                      <div style="display:flex;gap:8px;align-items:center">
+                        <df-tooltip text="Diego · en línea"><df-avatar name="Diego Fernández" status="online"></df-avatar></df-tooltip>
+                        <df-tooltip text="Ana · ausente"><df-avatar name="Ana Gómez" status="away"></df-avatar></df-tooltip>
+                        <df-tooltip text="Marcos · ocupado"><df-avatar name="Marcos Alonso" status="busy"></df-avatar></df-tooltip>
+                      </div>
+                    </df-tab-panel>
+                    <df-tab-panel label="Progreso">
+                      <df-progress label="Entrega RA3" value="90" show-value variant="success"></df-progress>
+                    </df-tab-panel>
+                  </df-tabs>
+                </div>
+                <pre>&lt;df-tabs&gt;&lt;df-tab-panel label="Equipo"&gt;…&lt;/df-tab-panel&gt;&lt;/df-tabs&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-button&gt;</code><span>Botón con variantes, tamaños y estado de carga</span></header>
+                <div class="lib-demo">
+                  <df-button>Primary</df-button>
+                  <df-button variant="secondary">Secondary</df-button>
+                  <df-button variant="success" shape="rounded">Success</df-button>
+                  <df-button variant="danger" shape="pill">Danger</df-button>
+                  <df-button variant="ghost" shape="rounded">Ghost</df-button>
+                  <df-button id="lib-loading-btn" variant="warning" shape="rounded">Púlsame (loading)</df-button>
+                </div>
+                <pre>&lt;df-button variant="danger" shape="pill"&gt;Danger&lt;/df-button&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-input&gt;</code><span>Campo con etiqueta, ayuda y validación</span></header>
+                <div class="lib-demo lib-demo-col">
+                  <df-input id="lib-input" label="Correo" type="email" placeholder="ana@ejemplo.com"
+                            hint="Escribe un correo y sal del campo" required></df-input>
+                  <df-button size="sm" shape="rounded" id="lib-validate-btn">validate()</df-button>
+                </div>
+                <pre>&lt;df-input label="Correo" type="email" required&gt;&lt;/df-input&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-modal&gt;</code><span>Diálogos y atajos con promesas</span></header>
+                <div class="lib-demo">
+                  <df-button shape="rounded" id="lib-modal-btn">Abrir modal</df-button>
+                  <df-button variant="danger" shape="rounded" id="lib-confirm-btn">DfModal.confirm()</df-button>
+                  <df-button variant="secondary" shape="rounded" id="lib-prompt-btn">DfModal.prompt()</df-button>
+                </div>
+                <pre>const ok = await DfModal.confirm({ message: '¿Seguro?' });</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-toast-stack&gt;</code><span>Notificaciones flotantes</span></header>
+                <div class="lib-demo">
+                  <df-button variant="success" size="sm" shape="rounded" data-lib-toast="success">success</df-button>
+                  <df-button variant="secondary" size="sm" shape="rounded" data-lib-toast="info">info</df-button>
+                  <df-button variant="warning" size="sm" shape="rounded" data-lib-toast="warning">warning</df-button>
+                  <df-button variant="danger" size="sm" shape="rounded" data-lib-toast="danger">danger</df-button>
+                </div>
+                <pre>document.getElementById('toasts').show('Guardado', 'success');</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-stat-card&gt;</code><span>Métricas con formato automático</span></header>
+                <div class="lib-demo lib-demo-grid">
+                  <df-stat-card label="Facturación" value="12480.5" format="currency" variant="success" hint="Este mes"></df-stat-card>
+                  <df-stat-card label="Progreso RA3" value="87.5" format="percent" variant="info" interactive id="lib-stat"></df-stat-card>
+                </div>
+                <pre>&lt;df-stat-card label="Facturación" value="12480.5" format="currency"&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-badge&gt;</code><span>Etiquetas de color</span></header>
+                <div class="lib-demo">
+                  <df-badge>teal</df-badge>
+                  <df-badge color="blue">blue</df-badge>
+                  <df-badge color="orange">orange</df-badge>
+                  <df-badge color="purple">purple</df-badge>
+                  <df-badge color="green" variant="soft" dot>Activo</df-badge>
+                  <df-badge color="red" variant="soft" dot>Inactivo</df-badge>
+                  <df-badge color="blue" variant="outline">outline</df-badge>
+                </div>
+                <pre>&lt;df-badge color="green" variant="soft" dot&gt;Activo&lt;/df-badge&gt;</pre>
+              </article>
+
+              <article class="lib-card">
+                <header><code>&lt;df-theme-toggle&gt;</code><span>Tema claro / oscuro (sincronizado con el de arriba)</span></header>
+                <div class="lib-demo">
+                  <df-theme-toggle class="lib-theme"></df-theme-toggle>
+                  <span class="lib-note">Cambia el tema de toda la app</span>
+                </div>
+                <pre>&lt;df-theme-toggle storage-key="mi-tema"&gt;&lt;/df-theme-toggle&gt;</pre>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 1: Formulario (Principal) -->
+        <section class="view-panel active-view" id="view-formulario">
+          <div class="card card-modern">
+            <div class="card-header">
+              <div>
+                <h2>Librería · Formulario Interactivo</h2>
+                <p class="subtitle">Inserta nuevos registros persistentes directamente en tu base de datos local.</p>
+              </div>
+              <span class="status-badge live"><i data-lucide="database"></i> Sync Local Storage</span>
+            </div>
+
+            <form class="ui-form" id="main-form" novalidate>
+              <div class="form-row">
+                <df-input class="form-group" id="input-nombre" name="nombre" label="Nombre completo"
+                          placeholder="Ej. Carlos Martínez" minlength="3" required></df-input>
+                <df-input class="form-group" id="input-email" name="email" type="email" label="Dirección de correo"
+                          placeholder="ejemplo@dominio.com" required></df-input>
+              </div>
+
+              <div class="form-row">
+                <df-select class="form-group" id="input-tipo" name="tipo" label="Tipo de perfil" value="Cliente" required>
+                  <option value="Cliente">Cliente</option>
+                  <option value="Proveedor">Proveedor</option>
+                  <option value="Alumno">Alumno</option>
+                </df-select>
+                <df-input class="form-group" id="input-fecha" name="fecha" type="date" label="Fecha de alta"
+                          hint="Si la dejas vacía se usa la de hoy"></df-input>
+              </div>
+
+              <div class="form-row">
+                <df-input class="form-group full-width" id="input-notas" name="notas" type="textarea" rows="3"
+                          label="Observaciones o notas" placeholder="Añade notas del cliente o detalles del contrato..."></df-input>
+              </div>
+
+              <div class="form-row form-checkbox-row">
+                <df-switch id="input-activo" name="activo" checked label="Registro activo y habilitado en la plataforma"></df-switch>
+              </div>
+
+              <div class="form-actions">
+                <df-button type="submit" id="btn-save">
+                  <i data-lucide="save"></i> Guardar en LocalStorage
+                </df-button>
+                <df-button type="reset" variant="secondary" id="btn-clear">
+                  <i data-lucide="rotate-ccw"></i> Resetear
+                </df-button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Vista 2: Directorio de Clientes -->
+        <section class="view-panel" id="view-sub-clientes">
+          <div class="card card-modern">
+            <div class="card-header">
+              <div>
+                <h2>Directorio de Clientes</h2>
+                <p class="subtitle">Búsqueda rápida, filtrado por tipo y exportación de datos.</p>
+              </div>
+            </div>
+
+            <!-- df-data-table: ordenación por columnas, búsqueda sin tildes y paginación -->
+            <df-data-table id="table-clients" searchable search-placeholder="Buscar por nombre, correo o tipo…"
+                           page-size="8" sort-key="fecha" sort-dir="desc" caption="Directorio de clientes"
+                           empty-text="Todavía no hay clientes. Crea el primero desde el formulario.">
+              <df-tooltip slot="toolbar" text="Descarga todos los clientes en un archivo .csv">
+                <df-button variant="secondary" size="sm" id="btn-export-csv"><i data-lucide="file-spreadsheet"></i> Exportar CSV</df-button>
+              </df-tooltip>
+            </df-data-table>
+          </div>
+        </section>
+
+        <!-- Vista 3: Horario Lectivo DAM 2 -->
+        <section class="view-panel" id="view-horario">
+          <div class="card card-modern card-fullwidth">
+            <div class="card-header">
+              <div>
+                <h2>Horario Lectivo · DAM 2 (TAME Formación)</h2>
+                <p class="subtitle">Planificación semanal de clases, aulas y asignaturas.</p>
+              </div>
+              <span class="status-badge live"><i data-lucide="calendar"></i> Curso 2026/2027</span>
+            </div>
+
+            <div class="table-container">
+              <table class="custom-table" id="table-schedule">
+                <thead>
+                  <tr>
+                    <th>Tramo Hora</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                  </tr>
+                </thead>
+                <tbody id="schedule-table-body">
+                  <!-- Renderizado dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 4: Tablero Kanban (Drag & Drop) -->
+        <section class="view-panel" id="view-seguimiento">
+          <div class="card card-modern card-fullwidth">
+            <div class="card-header">
+              <div>
+                <h2>Tablero Kanban CRM & Proyectos</h2>
+                <p class="subtitle">Arrastra las tarjetas entre columnas para actualizar el estado del flujo.</p>
+              </div>
+              <df-button size="sm" id="btn-add-kanban-card"><i data-lucide="plus"></i> Nueva Tarjeta</df-button>
+            </div>
+            <df-progress id="kanban-progress" label="Tareas completadas" show-value variant="success" class="kanban-progress"></df-progress>
+
+            <div class="kanban-board">
+              <div class="kanban-column" id="col-backlog" data-status="backlog">
+                <div class="kanban-col-header">
+                  <span class="col-dot yellow"></span>
+                  <h4>Pendiente / Lead</h4>
+                  <span class="col-count" id="count-backlog">0</span>
+                </div>
+                <div class="kanban-cards-container" id="cards-backlog"></div>
+              </div>
+
+              <div class="kanban-column" id="col-in_progress" data-status="in_progress">
+                <div class="kanban-col-header">
+                  <span class="col-dot blue"></span>
+                  <h4>En Proceso</h4>
+                  <span class="col-count" id="count-in_progress">0</span>
+                </div>
+                <div class="kanban-cards-container" id="cards-in_progress"></div>
+              </div>
+
+              <div class="kanban-column" id="col-done" data-status="done">
+                <div class="kanban-col-header">
+                  <span class="col-dot green"></span>
+                  <h4>Completado</h4>
+                  <span class="col-count" id="count-done">0</span>
+                </div>
+                <div class="kanban-cards-container" id="cards-done"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 5: Módulo de Productos e Inventario -->
+        <section class="view-panel" id="view-productos">
+          <div class="card card-modern">
+            <div class="card-header">
+              <div>
+                <h2>Inventario de Productos & Métricas</h2>
+                <p class="subtitle">Control de existencias y valoración estimada del stock.</p>
+              </div>
+              <df-button size="sm" id="btn-add-product"><i data-lucide="package-plus"></i> Añadir Producto</df-button>
+            </div>
+
+            <div class="metrics-grid">
+              <df-stat-card id="val-total-stock" label="Valor total stock" format="currency" variant="info">
+                <i data-lucide="euro" slot="icon"></i>
+              </df-stat-card>
+              <df-stat-card id="val-total-items" label="Total ítems" format="number" unit="u.">
+                <i data-lucide="boxes" slot="icon"></i>
+              </df-stat-card>
+              <df-stat-card id="val-low-stock" label="Alertas de bajo stock" hint="Pulsa para ver cuáles" interactive>
+                <i data-lucide="triangle-alert" slot="icon"></i>
+              </df-stat-card>
+            </div>
+
+            <df-data-table id="products-table" class="margin-t" searchable page-size="6" sort-key="nombre"
+                           caption="Inventario de productos" empty-text="No hay productos. Añade el primero."></df-data-table>
+          </div>
+        </section>
+
+        <!-- Vista 6: Configuración General & Ajustes de IA -->
+        <section class="view-panel" id="view-config">
+          <div class="card card-modern">
+            <h2>Configuración del Sistema</h2>
+            <p class="subtitle">Ajustes generales, motor de IA (Ollama / Gemini) y copias de seguridad.</p>
+
+            <div class="config-section margin-t">
+              <h3><i data-lucide="cpu"></i> Motor de Inteligencia Artificial</h3>
+              
+              <df-select class="margin-t-sm" id="select-ai-provider" label="Proveedor seleccionado" value="ollama">
+                <option value="ollama">Ollama local (privado y sin conexión)</option>
+                <option value="gemini">Google Gemini API (nube)</option>
+              </df-select>
+
+              <!-- Configuración Ollama -->
+              <div id="provider-ollama-fields" class="margin-t-sm">
+                <df-input class="form-group" id="input-ollama-url" label="URL del servidor Ollama"
+                          placeholder="http://localhost:11434" pattern="https?://.+" error-message="Debe empezar por http:// o https://"
+                          required></df-input>
+                <df-select class="margin-t-sm" id="select-ollama-model" label="Modelo local instalado" value="qwen2.5-coder:7b">
+                  <option value="qwen2.5-coder:7b">qwen2.5-coder:7b (recomendado para programar)</option>
+                  <option value="qwen2.5:3b-instruct">qwen2.5:3b-instruct (rápido)</option>
+                  <option value="llava:latest">llava:latest (multimodal)</option>
+                </df-select>
+              </div>
+
+              <!-- Configuración Gemini API -->
+              <div id="provider-gemini-fields" class="margin-t-sm" style="display:none;">
+                <df-input class="form-group" id="input-api-key" type="password" label="API Key de Google Gemini"
+                          placeholder="AIzaSy..."></df-input>
+              </div>
+
+              <df-button class="margin-t" id="btn-save-ai-settings">
+                <i data-lucide="save"></i> Guardar Ajustes de IA
+              </df-button>
+            </div>
+
+            <div class="config-section margin-t-lg">
+              <h3><i data-lucide="database"></i> Gestión de Datos y Backups</h3>
+              <div class="button-group margin-t-sm">
+                <df-button variant="secondary" id="btn-backup-export"><i data-lucide="download"></i> Exportar Todo (.JSON)</df-button>
+                <label class="btn btn-clear file-upload-btn">
+                  <i data-lucide="upload"></i> Importar Datos
+                  <input type="file" id="input-import-file" accept=".json" style="display:none;" />
+                </label>
+                <df-button variant="danger" shape="rounded" id="btn-reset-data"><i data-lucide="trash-2"></i> Restablecer Datos de Fábrica</df-button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 7: Demo Empresas -->
+        <section class="view-panel" id="view-sub-empresas">
+          <div class="card card-modern">
+            <h2>Directorio de Empresas Afiliadas</h2>
+            <p class="subtitle">Listado de organizaciones y proveedores vinculados.</p>
+            <div class="grid-cards">
+              <div class="mini-card">
+                <div class="mini-card-icon blue"><i data-lucide="building-2"></i></div>
+                <h3>Sodire Hospitality</h3>
+                <p>12 Contactos · Activa</p>
+              </div>
+              <div class="mini-card">
+                <div class="mini-card-icon teal"><i data-lucide="building"></i></div>
+                <h3>TAME Formación</h3>
+                <p>Centro de Estudio DAM</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 8: UI Toasts -->
+        <section class="view-panel" id="view-toasts">
+          <div class="card card-modern">
+            <h2>Librería · <code>&lt;df-toast-stack&gt;</code></h2>
+            <p class="subtitle">Notificaciones del componente propio. Pulsa un toast para cerrarlo antes de tiempo.</p>
+            <div class="button-group" id="toast-demo">
+              <df-button variant="success" shape="rounded" data-msg="¡Operación realizada con éxito!" data-type="success">Toast Éxito</df-button>
+              <df-button variant="secondary" shape="rounded" data-msg="Actualización de datos disponible." data-type="info">Toast Info</df-button>
+              <df-button variant="warning" shape="rounded" data-msg="Quedan pocos elementos en inventario." data-type="warning">Toast Advertencia</df-button>
+              <df-button variant="danger" shape="rounded" data-msg="Error al conectar con el servidor." data-type="danger">Toast Error</df-button>
+            </div>
+            <div class="form-row margin-t" style="max-width:420px">
+              <df-select class="form-group" id="toast-position" label="Posición" value="bottom-right">
+                <option value="bottom-right">Abajo derecha</option>
+                <option value="bottom-left">Abajo izquierda</option>
+                <option value="top-right">Arriba derecha</option>
+                <option value="top-center">Arriba centro</option>
+              </df-select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista 9: Modales -->
+        <section class="view-panel" id="view-modal">
+          <div class="card card-modern">
+            <h2>Librería · <code>&lt;df-modal&gt;</code></h2>
+            <p class="subtitle">Modal declarado en HTML y los atajos <code>DfModal.confirm()</code> / <code>DfModal.prompt()</code> que sustituyen a <code>confirm()</code> y <code>prompt()</code> del navegador.</p>
+            <div class="button-group">
+              <df-button id="btn-open-modal-demo"><i data-lucide="external-link"></i> Abrir modal de prueba</df-button>
+              <df-button variant="danger" id="btn-confirm-demo"><i data-lucide="circle-help"></i> DfModal.confirm()</df-button>
+              <df-button variant="secondary" id="btn-prompt-demo"><i data-lucide="text-cursor-input"></i> DfModal.prompt()</df-button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Command Palette Flotante (Ctrl + K) -->
+  <div class="cmd-overlay" id="cmd-palette">
+    <div class="cmd-dialog">
+      <div class="cmd-header">
+        <i data-lucide="terminal"></i>
+        <input type="text" id="cmd-input" placeholder="Escribe un comando o busca una vista..." autocomplete="off" />
+        <span class="cmd-esc"><kbd>ESC</kbd></span>
+      </div>
+      <div class="cmd-results" id="cmd-results-list"></div>
+    </div>
+  </div>
+
+  <!-- Modal de demostración (componente df-modal) -->
+  <df-modal id="modal-demo" heading="Diálogo de confirmación" confirm-text="Entendido">
+    <p>Este diálogo es un <strong>&lt;df-modal&gt;</strong> de la librería diegofo-ui.</p>
+    <p style="margin-top:8px">Se cierra con Aceptar, Cancelar, la X, la tecla <kbd>Esc</kbd> o pulsando fuera.</p>
+  </df-modal>
+
+  <!-- Panel Desplegable del Asistente IA (Ollama / Gemini) -->
+  <div class="assistant-drawer" id="assistant-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <i data-lucide="bot"></i> <span id="assistant-header-title">Asistente IA (qwen2.5-coder:7b)</span>
+      </div>
+      <button class="drawer-close" id="assistant-close">&times;</button>
+    </div>
+    <div class="drawer-body" id="chat-history">
+      <div class="chat-msg bot">¡Hola Diego! Soy tu asistente de la estación de trabajo <strong>diegofo-ui</strong>. ¿En qué te puedo ayudar hoy?</div>
+    </div>
+    <div class="drawer-footer">
+      <input type="text" id="chat-input" placeholder="Pregúntame algo sobre tu código, tareas o proyectos..." />
+      <button id="chat-send-btn"><i data-lucide="send"></i></button>
+    </div>
+  </div>
+
+  <!-- Contenedor de notificaciones (componente df-toast-stack) -->
+  <df-toast-stack id="toasts" position="bottom-right" duration="3000" max="4"></df-toast-stack>
+
+  <script src="script.js"></script>
+</body>
+</html>

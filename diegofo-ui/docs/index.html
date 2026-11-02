@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>diegofo-ui · Componentes web accesibles y sin dependencias</title>
+  <meta name="description" content="Librería de Web Components en JavaScript puro: botones, formularios, modales, tablas de datos, pestañas y más. Accesible, con tema oscuro y sin dependencias." />
+  <meta name="theme-color" content="#123b45" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="top">
+    <a class="marca" href="#/" aria-label="diegofo-ui, inicio">
+      <svg class="marca-icono" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 6h18l8 20H3z" fill="currentColor"/><path d="M8 12h9l3 8H8z" fill="#0d9488"/></svg>
+      <span>diegofo-ui</span>
+      <span class="version" id="version"></span>
+    </a>
+    <nav class="top-nav" aria-label="Principal">
+      <a href="#/empezar" data-ruta="empezar">Guía</a>
+      <a href="#/c/df-button" data-ruta="c">Componentes</a>
+      <a href="#/temas" data-ruta="temas">Temas</a>
+      <a href="#/banco" data-ruta="banco">Banco de pruebas</a>
+      <a href="../../app/index.html">App de ejemplo</a>
+      <a href="https://github.com/DiegoFdzOrtega/diegofo-ui" rel="noopener">GitHub</a>
+    </nav>
+    <df-theme-toggle storage-key="diegofo-docs-tema" class="top-tema"></df-theme-toggle>
+  </header>
+
+  <div class="marco" id="marco">
+    <aside class="lateral" id="lateral" aria-label="Componentes">
+      <label class="buscar">
+        <span class="visually-hidden">Buscar componente</span>
+        <input id="buscar" type="search" placeholder="Buscar componente" autocomplete="off">
+      </label>
+      <nav id="menu"></nav>
+    </aside>
+    <main id="contenido" tabindex="-1"></main>
+  </div>
+
+  <df-toast-stack position="bottom-right"></df-toast-stack>
+
+  <script src="../dist/diegofo-ui.min.js"></script>
+  <script src="assets/meta.js"></script>
+  <script src="assets/componentes.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
